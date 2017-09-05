@@ -1,0 +1,27 @@
+{
+  "name": "cs-lawn-mower",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/princesspoopan/cs-lawn-mower.git"
+  },
+  "keywords": [
+    "cs-lawn-mower"
+  ],
+  "author": "princesspoopan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/princesspoopan/cs-lawn-mower/issues"
+  },
+  "homepage": "https://github.com/princesspoopan/cs-lawn-mower#readme",
+  "devDependencies": {
+    "invariant": "^2.2.2",
+    "lab": "^14.2.2"
+  },
+  "dependencies": {}
+}
