@@ -7,7 +7,7 @@
 - `npm install`
 - `npm run demo`
 
-*You can change input inside demo/input.txt*
+*You can change input inside `demo/input.txt`*
 
 
 ### How to run test
