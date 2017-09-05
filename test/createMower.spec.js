@@ -89,13 +89,38 @@ lab.experiment('createMower', () => {
     })
 
     it ('should not move if the position after the move is outside the lawn', (done) => {
-      const mower = getMower()
-      mower.move('L')
-      mower.move('F')
-      mower.move('F')
-      expect(mower.position).to.equal({
-        coordinate: { x: 0, y: 2 },
-        direction: 'W'
+      const mower1 = getMower()
+      mower1.move('L')
+      mower1.move('F')
+      mower1.move('L')
+      mower1.move('F')
+      mower1.move('L')
+      mower1.move('F')
+      mower1.move('R')
+      mower1.move('F')
+      mower1.move('F')
+      expect(mower1.position).to.equal({
+        coordinate: { x: 1, y: 0 },
+        direction: 'S'
+      })
+
+      const mower2 = getMower()
+      mower2.move('L')
+      mower2.move('F')
+      mower2.move('F')
+      mower2.move('R')
+      mower2.move('F')
+      mower2.move('F')
+      mower2.move('R')
+      mower2.move('F')
+      mower2.move('F')
+      mower2.move('F')
+      mower2.move('F')
+      mower2.move('F')
+      mower2.move('F')
+      expect(mower2.position).to.equal({
+        coordinate: { x: 5, y: 4 },
+        direction: 'E'
       })
       done()
     })
