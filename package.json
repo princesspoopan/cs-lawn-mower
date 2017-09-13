@@ -21,8 +21,12 @@
   },
   "homepage": "https://github.com/princesspoopan/cs-lawn-mower#readme",
   "devDependencies": {
+    "eslint": "^4.6.1",
     "invariant": "^2.2.2",
-    "lab": "^14.2.2"
+    "lab": "^14.2.2",
+    "standard": "^10.0.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "path": "^0.12.7"
+  }
 }
