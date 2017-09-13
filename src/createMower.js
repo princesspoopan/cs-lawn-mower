@@ -3,53 +3,35 @@ const invariant = require('invariant')
 module.exports = function createMower ({
   upperRightCorner,
   initialPosition = {
-    coordinate: { x: 0, y: 0 },
-    direction: 'N'
+    coordinate: [0, 0],
+    direction: [0, 1]
   }
 }) {
-
-  const directions = ['N', 'E', 'S', 'W']
-
   invariant(upperRightCorner, 'upperRightCorner is missing')
-  invariant(
-    directions.indexOf(initialPosition.direction) >= 0,
-    'direction of initialPosition is incorrect'
-   )
   invariant(
     !isOutSideLawn(initialPosition.coordinate),
     'initialPosition is outside the lawn'
-   )
+  )
 
   let position = initialPosition
-
-  function getNextDirection (direction) {
-    const currentIndex = directions.indexOf(position.direction)
-    const nextIndex = ((currentIndex + direction) + 4) % 4
-    return directions[nextIndex]
+  function getNextDirection (rotation) {
+    const zeroQuirks = (number) => (
+      number === 0 ? 0 : number // this is for -0
+    )
+    return [
+      zeroQuirks(position.direction[1] * rotation),
+      zeroQuirks(position.direction[0] * (-1 * rotation))
+    ]
   }
 
   function isOutSideLawn (coordinate) {
-    return coordinate.x < 0 || coordinate.x > upperRightCorner.x ||
-      coordinate.y < 0 || coordinate.y > upperRightCorner.y
+    return coordinate[0] < 0 || coordinate[0] > upperRightCorner[0] ||
+      coordinate[1] < 0 || coordinate[1] > upperRightCorner[1]
   }
 
   function getNextCoordinate () {
-    const { x, y } = position.coordinate
-    let nextCoordinate
-    switch (position.direction) {
-      case 'N':
-        nextCoordinate = { x, y: y + 1 }
-        break
-      case 'E':
-        nextCoordinate = { x: x + 1, y }
-        break
-      case 'S':
-        nextCoordinate = { x, y: y - 1 }
-        break
-      case 'W':
-        nextCoordinate = { x: x - 1, y }
-        break
-    }
+    const { coordinate, direction } = position
+    const nextCoordinate = [coordinate[0] + direction[0], coordinate[1] + direction[1]]
     return isOutSideLawn(nextCoordinate) ? position.coordinate : nextCoordinate
   }
 
@@ -57,15 +39,14 @@ module.exports = function createMower ({
     position,
     move (command) {
       switch (command) {
-        case 'L':
-          position.direction = getNextDirection(-1)
-          break
-        case 'R':
-          position.direction = getNextDirection(1)
-          break
-        case 'F':
-          position.coordinate = getNextCoordinate()
-          break
+      case 'L': position.direction = getNextDirection(-1)
+        break
+      case 'R':
+        position.direction = getNextDirection(1)
+        break
+      case 'F':
+        position.coordinate = getNextCoordinate()
+        break
       }
     }
   }
